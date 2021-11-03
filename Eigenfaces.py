@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 [eigenfaces using PCA]
-
 detector - SSD/ DLIB
-@author: esthe
 """
 
 # %%
@@ -18,7 +16,6 @@ from sklearn.svm import SVC
 from pyimagesearch.faces import load_face_dataset,load_face_dlib
 from imutils import build_montages
 import numpy as np
-#import argparse
 import imutils
 import time
 import cv2
@@ -44,9 +41,7 @@ args = vars(ap.parse_args())
 """
 # %% LOAD PATHS AND INITIALIZE SOME STUFF
 print("[INFO] loading dataset...")
-#input_path = (r"C:\FR_Assignment\FR_DB_PCA")
-input_path = (r"C:\FR_Assignment\DB5_PCA_FULL")
-#input_path = (r"C:\FR_Assignment\caltech_faces")
+input_path = (...)
 
 #%% INITIALIZE DETECTOR MODEL
 
@@ -56,7 +51,7 @@ input_path = (r"C:\FR_Assignment\DB5_PCA_FULL")
 print("[INFO] loading face detector model...")
 
 # initialize path for face detection method 1 (SSD)
-face_detect_path = (r"C:\FR_Assignment\face_detector")
+face_detect_path = (r"...\face_detector")
 prototxtPath = os.path.sep.join([face_detect_path, "deploy.prototxt.txt"])
 weightsPath = os.path.sep.join([face_detect_path,
     "res10_300x300_ssd_iter_140000.caffemodel"])
@@ -171,36 +166,7 @@ end = time.time()
 fe_time = (end-start)/len(trainX)
 total_fe = (end-start)
 print("[INFO] avg time computing eigenfaces per img took {:.4f} seconds".format(total_fe))
-
-""" VISUALIZER
-ap.add_argument("-v", "--visualize", type=int, default=-1,
-	help="whether or not PCA components should be visualized")
-
-visualizer = 5
-
-# check to see if the PCA components should be visualized
-if visualizer > 0:
-	# initialize the list of images in the montage
-	images = []
-	# loop over the first 16 individual components
-	for (i, component) in enumerate(pca.components_[:16]):
-		# reshape the component to a 2D matrix, then convert the data
-		# type to an unsigned 8-bit integer so it can be displayed
-		# with OpenCV
-		component = component.reshape((62, 47))
-		component = rescale_intensity(component, out_range=(0, 255))
-		component = np.dstack([component.astype("uint8")] * 3)
-		images.append(component)
-	# construct the montage for the images
-	montage = build_montages(images, (47, 62), (4, 4))[0]
-	# show the mean and principal component visualizations
-	# show the mean image
-	mean = pca.mean_.reshape((62, 47))
-	mean = rescale_intensity(mean, out_range=(0, 255)).astype("uint8")
-	cv2.imshow("Mean", mean)
-	cv2.imshow("Components", montage)
-	cv2.waitKey(0)
-"""    
+ 
 # %%
 " Classifier - SVM"
 
@@ -241,20 +207,6 @@ for x in range(len(predictions)):
 rec_rate = correct/total
 print("Recognition Rate:", rec_rate*100)
 
-#%% K-fold validation 
-"""
-from sklearn.model_selection import KFold
-from sklearn.model_selection import cross_val_score
-from numpy import std
-
-# prepare the cross-validation procedure
-cv = KFold(n_splits=5, random_state=1, shuffle=True)
-
-# evaluate model
-scores = cross_val_score(model, trainX, trainY, scoring='accuracy', cv=cv, n_jobs=-1)
-# report performance
-print('Accuracy: %.3f (%.3f)' % (mean(scores), std(scores)))
-"""
 
 # %%
 "Visualization of recognition/prediction"

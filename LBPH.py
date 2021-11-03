@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-
-
-@author: esthe
+Local Binary Patterns Histogram 
 """
 
 # %%
@@ -14,27 +12,11 @@ from sklearn.metrics import classification_report
 from pyimagesearch.faces import load_face_dataset, load_face_dlib
 from matplotlib import pyplot as plt
 import numpy as np
-#import argparse
 import imutils
 import time
 import cv2
 import os
 
-#%% 
-" Valid only when using cmd "
-
-"""
-# construct the argument parser and parse the arguments
-ap = argparse.ArgumentParser()
-ap.add_argument("-i", "--input", type=str, required=True,
-    help="path to input directory of images")
-ap.add_argument("-f", "--face", type=str,
-    default="face_detector",
-    help="path to face detector model directory")
-ap.add_argument("-c", "--confidence", type=float, default=0.5,
-    help="minimum probability to filter weak detections")
-args = vars(ap.parse_args())
-"""
 
 #%%
 " Load face detection model from disk (both types, HOG and SSD)"
@@ -43,7 +25,7 @@ args = vars(ap.parse_args())
 print("[INFO] loading face detector model...")
 
 # initialize path for face detection method 1
-face_detect_path = (r"C:\FR_Assignment\face_detector")
+face_detect_path = (r"...\face_detector")
 prototxtPath = os.path.sep.join([face_detect_path, "deploy.prototxt.txt"])
 weightsPath = os.path.sep.join([face_detect_path,
     "res10_300x300_ssd_iter_140000.caffemodel"])
@@ -58,7 +40,7 @@ detection_method = 'hog'
 "Load whole dataset of detected faces with labels"
 # load the faces dataset
 print("[INFO] loading dataset...")
-db_path = (r"C:\FR_Assignment\DB5_PCA_FULL")
+db_path = (...)
 
 # face detection method 1 (ssd) 
 # (faces, labels) = load_face_dataset(db_path, net, minConfidence=0.90, minSamples=10, x = xtrain)
@@ -129,8 +111,6 @@ print("[INFO] avg recognition per image of {0} loops took {1} seconds".format(lo
 print("[INFO] avg recognition rate of {0} loops is {1}% ".format(loop_count,round(t_rec_rate/loop_count,4)*100))
 
 
-
-
 # %%
 "train our LBP face recognizer"
 
@@ -174,101 +154,3 @@ for i in idxs:
     cv2.imshow("Face", face)
     cv2.waitKey(0)
 
-
-
-
-#%%
-"""
-# Visualize LBP images
-def get_pixel(img, center, x, y):
-      
-    new_value = 0
-      
-    try:
-        # If local neighbourhood pixel 
-        # value is greater than or equal
-        # to center pixel values then 
-        # set it to 1
-        if img[x][y] >= center:
-            new_value = 1
-              
-    except:
-        # Exception is required when 
-        # neighbourhood value of a center
-        # pixel value is null i.e. values
-        # present at boundaries.
-        pass
-      
-    return new_value
-   
-# Function for calculating LBP
-def lbp_calculated_pixel(img, x, y):
-   
-    center = img[x][y]
-   
-    val_ar = []
-      
-    # top_left
-    val_ar.append(get_pixel(img, center, x-1, y-1))
-      
-    # top
-    val_ar.append(get_pixel(img, center, x-1, y))
-      
-    # top_right
-    val_ar.append(get_pixel(img, center, x-1, y + 1))
-      
-    # right
-    val_ar.append(get_pixel(img, center, x, y + 1))
-      
-    # bottom_right
-    val_ar.append(get_pixel(img, center, x + 1, y + 1))
-      
-    # bottom
-    val_ar.append(get_pixel(img, center, x + 1, y))
-      
-    # bottom_left
-    val_ar.append(get_pixel(img, center, x + 1, y-1))
-      
-    # left
-    val_ar.append(get_pixel(img, center, x, y-1))
-       
-    # Now, we need to convert binary
-    # values to decimal
-    power_val = [1, 2, 4, 8, 16, 32, 64, 128]
-   
-    val = 0
-      
-    for i in range(len(val_ar)):
-        val += val_ar[i] * power_val[i]
-          
-    return val
-
-path = (r"C:\FR_Assignment\test_db\abu.jpg")
-img_bgr = cv2.imread(path)
-
-# got dash because input img is rgb, 3 channels, if grayscale then remove _    
-height, width, _ = img_bgr.shape
-   
-# We need to convert RGB image 
-# into gray one because gray 
-# image has one channel only.
-img_gray = cv2.cvtColor(img_bgr,
-                        cv2.COLOR_BGR2GRAY)
-   
-# Create a numpy array as 
-# the same height and width 
-# of RGB image
-img_lbp = np.zeros((height, width),
-                   np.uint8)
-   
-for i in range(0, height):
-    for j in range(0, width):
-        img_lbp[i, j] = lbp_calculated_pixel(img_gray, i, j)
-  
-plt.imshow(img_bgr)
-plt.show()
-   
-plt.imshow(img_lbp, cmap ="gray")
-plt.show()
-
-"""

@@ -1,19 +1,13 @@
 # -*- coding: utf-8 -*-
 """
-Created on Fri Sep 24 16:09:28 2021
-
-@author: esthe
-
 [ Facenet encoding faces ] (expects 160,160)
 """
 
 # %%
 
 " import the necessary packages"
-#from sklearn.preprocessing import LabelEncoder
-from pyimagesearch.faces import load_face_dataset, load_face_dlib,findCosineDistance,findEuclideanDistance
+from pyimagesearch.faces import load_face_dataset, load_face_dlib,findCosineDistance,findEuclideanDistance #custom functions
 import numpy as np
-#import argparse
 import imutils
 import time
 import cv2
@@ -25,11 +19,11 @@ import pickle
 #%% LOADING TRAINING SET AND PICKLE FILE LOCATION
 # load the training dataset
 print("[INFO] loading training dataset...")
-train_path = (r"C:\FR_Assignment\DB_5")
+train_path = (...)
 
 # load the testing dataset
 print("[INFO] loading testing dataset...")
-test_path = (r"C:\FR_Assignment\final_test_db")
+test_path = (...)
 
 # path to store pickle file of encoded faces
 pickle_path = (r"C:\FR_Assignment\DB5_SSD_FaceNet_encoding50")
@@ -42,7 +36,7 @@ pickle_path = (r"C:\FR_Assignment\DB5_SSD_FaceNet_encoding50")
 print("[INFO] loading face detector model...")
 
 # initialize path for face detection method 1 (SSD)
-face_detect_path = (r"C:\FR_Assignment\face_detector")
+face_detect_path = (r"C:\...\face_detector")
 prototxtPath = os.path.sep.join([face_detect_path, "deploy.prototxt.txt"])
 weightsPath = os.path.sep.join([face_detect_path,
     "res10_300x300_ssd_iter_140000.caffemodel"])
@@ -89,7 +83,7 @@ faces, labels = detect_faces(detect_select, train_path, x=x)
 face_encoder = InceptionResNetV2()
 # path of pretrained weights
 # if cannot run this part means the h5 file has been corrupted 
-path = (r"C:\FR_Assignment\face_analysis_tensorflow2\facenet_keras.h5") 
+path = (r"C:\...\facenet_keras.h5") 
 # load weights into network 
 face_encoder.load_weights(path)
 
@@ -152,7 +146,7 @@ PHASE 2 (RECOGNITION PHASE) on testing dataset
 
 # load the testing dataset
 print("[INFO] loading testing dataset...")
-test_path = (r"C:\FR_Assignment\FR_Cina")
+test_path = (...)
 
 # (this part is for recognition rate calculation)
 
@@ -160,11 +154,11 @@ test_path_total = list(paths.list_images(test_path))
 #%% LOADING ENCODINGS OF TRAINING DATA 
 
 # ssd
-train_encoding_path = (r"C:\FR_Assignment\DBFULL_front_SSD_FaceNet_encoding50")
+train_encoding_path = (r"...\DBFULL_front_SSD_FaceNet_encoding50")
 
 
-#train_encoding_path = (r"C:\FR_Assignment\DB5_SSD_FaceNet_encoding50")
-#train_encoding_path =(r"C:\FR_Assignment\DBFULL_front_HOG_FaceNet_encoding50")
+#train_encoding_path = (r"...\DB5_SSD_FaceNet_encoding50")
+#train_encoding_path =(r"...\DBFULL_front_HOG_FaceNet_encoding50")
 
 # load the known faces and embeddings
 print("[INFO] loading encodings...") 
@@ -245,11 +239,7 @@ print("Recognition Rate:", rec_rate*100)
         
 
 #%% VISUALIZATION
-#(wrong_list)
-#range(len(test_knownNames))
- 
-
-# printing errors
+# printing errors/ wrong recognized faces
 for i in (wrong_list) :
     # grab the predicted name and actual name
     predName = pred_test_name[i]
