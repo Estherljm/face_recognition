@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 [eigenfaces using PCA]
-
 detector - SSD/ DLIB
-@author: esthe
 """
 
 # %%
@@ -18,7 +16,6 @@ from sklearn.svm import SVC
 from pyimagesearch.faces import load_face_dataset,load_face_dlib
 from imutils import build_montages
 import numpy as np
-#import argparse
 import imutils
 import time
 import cv2
