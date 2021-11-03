@@ -1,18 +1,12 @@
 # -*- coding: utf-8 -*-
 """
-Created on Fri Sep 24 23:53:32 2021
-https://sefiks.com/2018/08/06/deep-face-recognition-with-keras/
-
 [ VGG Face Encoding] - input size expects (224,224)
-@author: esthe
 """
 
 # %%
 
 " import the necessary packages"
-#from sklearn.preprocessing import LabelEncoder
-from pyimagesearch.faces import load_face_dataset,load_face_dlib,findCosineDistance,findEuclideanDistance
-#import argparse
+from pyimagesearch.faces import load_face_dataset,load_face_dlib,findCosineDistance,findEuclideanDistance #custom functions
 import imutils
 import time
 import cv2
@@ -27,14 +21,14 @@ from keras.layers import ZeroPadding2D, Convolution2D, MaxPooling2D,Dropout,Flat
 #%% LOADING TRAINING AND TESTING DATASETS
 # load the training dataset
 print("[INFO] loading training dataset...")
-train_path = (r"C:\FR_Assignment\DB_5")
+train_path = (...)
 
 # load the testing dataset
 print("[INFO] loading testing dataset...")
-test_path = (r"C:\FR_Assignment\FR_Cina")
+test_path = (...)
 
 # path to store pickle file of encoded faces
-pickle_path = (r"C:\FR_Assignment\DB5_SSD_VGGFace_encoding50")
+pickle_path = (r"...\DB5_SSD_VGGFace_encoding50")
 
 #%% INITIALIZE DETECTOR MODEL
 
@@ -44,7 +38,7 @@ pickle_path = (r"C:\FR_Assignment\DB5_SSD_VGGFace_encoding50")
 print("[INFO] loading face detector model...")
 
 # initialize path for face detection method 1 (SSD)
-face_detect_path = (r"C:\FR_Assignment\face_detector")
+face_detect_path = (r"...\face_detector")
 prototxtPath = os.path.sep.join([face_detect_path, "deploy.prototxt.txt"])
 weightsPath = os.path.sep.join([face_detect_path,
     "res10_300x300_ssd_iter_140000.caffemodel"])
@@ -150,7 +144,7 @@ def vgg_model(vgg_weight_path):
     return vgg_face
 
 # path for pretrained weights
-vgg_weight_path = (r"C:\FR_Assignment\face_analysis_tensorflow2\vgg_face_weights.h5") 
+vgg_weight_path = (r"....\face_analysis_tensorflow2\vgg_face_weights.h5") 
 # use function to get a pretrained vggface model 
 vgg_face = vgg_model(vgg_weight_path)
 
@@ -213,8 +207,7 @@ test_path_total = list(paths.list_images(test_path))
     
 #%% LOADING ENCODINGS OF TRAINING DATA 
 
-#train_encoding_path = (r"C:\FR_Assignment\DB5_SSD_VGGFace_encoding50")
-train_encoding_path = (r"C:\FR_Assignment\DBFULL_front_SSD_VGGFace_encoding50")
+train_encoding_path = (r"...\DBFULL_front_SSD_VGGFace_encoding50")
 
 # load the known faces and embeddings
 print("[INFO] loading encodings...") 
